@@ -7,8 +7,8 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
 [![Vitest](https://img.shields.io/badge/Tested-Vitest-6E9F18?style=flat-square&logo=vitest&logoColor=white)](https://vitest.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![CI](https://img.shields.io/github/actions/workflow/status/USER/REPO/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/USER/REPO/actions)
+[![License](https://img.shields.io/github/license/Tuannll/react-task-manager?style=flat-square)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/Tuannll/react-task-manager/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/Tuannll/react-task-manager/actions)
 
 **[Tính năng](#-tính-năng) • [Cài đặt](#-cài-đặt) • [Cấu trúc](#-cấu-trúc-dự-án) • [FAQ](#-faq)**
 
@@ -36,7 +36,7 @@
 
 ```bash
 git clone https://github.com/Tuannll/react-task-manager.git
-cd REPO
+cd react-task-manager
 npm install
 npm run dev
 ```

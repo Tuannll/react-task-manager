@@ -110,56 +110,58 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="app__header">
-        <h1 className="app__heading">Task Manager</h1>
-        <button type="button" className="btn btn--primary" onClick={openCreate}>
-          Add task
-        </button>
-      </header>
+      <div className="app__content" aria-hidden={formOpen ? 'true' : undefined}>
+        <header className="app__header">
+          <h1 className="app__heading">Task Manager</h1>
+          <button type="button" className="btn btn--primary" onClick={openCreate}>
+            Add task
+          </button>
+        </header>
 
-      {recovered && (
-        <div role="alert" className="alert alert--warning">
-          Saved data was unreadable and has been reset. Your previous tasks could not be recovered.
-        </div>
-      )}
-
-      <TaskSummary stats={stats} />
-
-      <TaskToolbar filters={filters} onChange={handleFilterChange} onClear={clearFilters} />
-
-      <main>
-        {formOpen && (
-          <div
-            className="dialog-backdrop"
-            role="dialog"
-            aria-modal="true"
-            aria-label={editingTask ? 'Edit task' : 'New task'}
-            onClick={(e) => { if (e.target === e.currentTarget) closeForm() }}
-          >
-            <div className="dialog" ref={dialogRef}>
-              <TaskForm key={editingTask?.id ?? 'create'} initial={editingTask} onSubmit={handleSubmit} onCancel={closeForm} />
-            </div>
+        {recovered && (
+          <div role="alert" className="alert alert--warning">
+            Saved data was unreadable and has been reset. Your previous tasks could not be recovered.
           </div>
         )}
 
-        {tasks.length === 0 ? (
-          <EmptyState variant="no-tasks" onAction={openCreate} />
-        ) : visible.length === 0 ? (
-          <EmptyState variant="no-match" onAction={clearFilters} />
-        ) : (
-          <TaskList
-            tasks={visible}
-            today={today()}
-            onToggle={handleToggle}
-            onEdit={openEdit}
-            onDelete={handleDelete}
-          />
-        )}
-      </main>
+        <TaskSummary stats={stats} />
 
-      <footer className="app__footer">
-        <p>Tasks saved in this browser. Clearing site data will delete all tasks.</p>
-      </footer>
+        <TaskToolbar filters={filters} onChange={handleFilterChange} onClear={clearFilters} />
+
+        <main>
+          {tasks.length === 0 ? (
+            <EmptyState variant="no-tasks" onAction={openCreate} />
+          ) : visible.length === 0 ? (
+            <EmptyState variant="no-match" onAction={clearFilters} />
+          ) : (
+            <TaskList
+              tasks={visible}
+              today={today()}
+              onToggle={handleToggle}
+              onEdit={openEdit}
+              onDelete={handleDelete}
+            />
+          )}
+        </main>
+
+        <footer className="app__footer">
+          <p>Tasks saved in this browser. Clearing site data will delete all tasks.</p>
+        </footer>
+      </div>
+
+      {formOpen && (
+        <div
+          className="dialog-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-label={editingTask ? 'Edit task' : 'New task'}
+          onClick={(e) => { if (e.target === e.currentTarget) closeForm() }}
+        >
+          <div className="dialog" ref={dialogRef}>
+            <TaskForm key={editingTask?.id ?? 'create'} initial={editingTask} onSubmit={handleSubmit} onCancel={closeForm} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
