@@ -84,7 +84,7 @@ export default function App() {
 
     dialog.addEventListener('keydown', handleKey)
     return () => dialog.removeEventListener('keydown', handleKey)
-  }, [formOpen]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [formOpen]) // closeForm is stable (no deps)
 
   function handleSubmit(formData) {
     if (editingTask) {
@@ -107,7 +107,6 @@ export default function App() {
 
   const visible = filterTasks(tasks, filters)
   const stats = getTaskStats(tasks, today())
-  const hasFilter = Object.keys(DEFAULT_FILTERS).some((k) => filters[k] !== DEFAULT_FILTERS[k])
 
   return (
     <div className="app">
@@ -138,7 +137,7 @@ export default function App() {
             onClick={(e) => { if (e.target === e.currentTarget) closeForm() }}
           >
             <div className="dialog" ref={dialogRef}>
-              <TaskForm initial={editingTask} onSubmit={handleSubmit} onCancel={closeForm} />
+              <TaskForm key={editingTask?.id ?? 'create'} initial={editingTask} onSubmit={handleSubmit} onCancel={closeForm} />
             </div>
           </div>
         )}

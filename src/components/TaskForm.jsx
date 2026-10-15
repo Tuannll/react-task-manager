@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const EMPTY = { title: '', description: '', priority: 'medium', dueDate: '' }
 
@@ -8,6 +8,8 @@ const EMPTY = { title: '', description: '', priority: 'medium', dueDate: '' }
  *   initial  – task object when editing, null when creating
  *   onSubmit – fn(formData)
  *   onCancel – fn()
+ *
+ * Parent must pass key={editingTask?.id ?? 'create'} to reset state on switch.
  */
 export default function TaskForm({ initial = null, onSubmit, onCancel }) {
   const [fields, setFields] = useState(initial ? {
@@ -17,17 +19,6 @@ export default function TaskForm({ initial = null, onSubmit, onCancel }) {
     dueDate: initial.dueDate,
   } : EMPTY)
   const [error, setError] = useState('')
-
-  // Sync when switching from create to edit
-  useEffect(() => {
-    setFields(initial ? {
-      title: initial.title,
-      description: initial.description,
-      priority: initial.priority,
-      dueDate: initial.dueDate,
-    } : EMPTY)
-    setError('')
-  }, [initial])
 
   function set(key, value) {
     setFields((prev) => ({ ...prev, [key]: value }))
