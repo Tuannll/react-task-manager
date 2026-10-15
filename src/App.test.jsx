@@ -61,7 +61,7 @@ describe('App integration', () => {
     await user.click(screen.getByRole('button', { name: /add task/i }))
 
     await user.click(screen.getByRole('button', { name: /edit task: original title/i }))
-    const titleInput = screen.getByLabelText(/title/i)
+    const titleInput = within(screen.getByRole('dialog')).getByLabelText(/title/i)
     await user.clear(titleInput)
     await user.type(titleInput, 'Updated title')
     await user.click(screen.getByRole('button', { name: /save changes/i }))
@@ -147,7 +147,7 @@ describe('App integration', () => {
     await user.click(screen.getByRole('button', { name: /add task/i }))
 
     // Filter to high priority
-    await user.selectOptions(screen.getByLabelText(/priority/i), 'high')
+    await user.selectOptions(screen.getByLabelText('Priority'), 'high')
     expect(screen.getByText(/no tasks match/i)).toBeInTheDocument()
   })
 
@@ -156,12 +156,12 @@ describe('App integration', () => {
     render(<App />)
 
     const summary = () => screen.getByRole('status', { name: /task summary/i })
-    expect(within(summary()).getByText(/0/)).toBeInTheDocument()
+    expect(summary()).toHaveTextContent(/^0 total/)
 
     await user.click(screen.getAllByRole('button', { name: /add task/i })[0])
     await user.type(screen.getByLabelText(/title/i), 'Count me')
     await user.click(screen.getByRole('button', { name: /add task/i }))
 
-    expect(within(summary()).getByText('1')).toBeInTheDocument()
+    expect(summary()).toHaveTextContent(/^1 total/)
   })
 })
