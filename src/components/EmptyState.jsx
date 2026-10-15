@@ -1,3 +1,5 @@
+import React from 'react'
+
 /**
  * Empty state for two situations:
  *   variant='no-tasks'  – no tasks exist yet, prompt to create

@@ -1,3 +1,5 @@
+import React from 'react'
+
 /**
  * Summary bar: total, active, completed, overdue counts.
  * Props: stats – { total, active, completed, overdue }
